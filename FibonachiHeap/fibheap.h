@@ -10,8 +10,10 @@ struct Node {
     int degree;
     bool mark;
 
-    Node() : parent(nullptr), child(nullptr), left(nullptr), right(nullptr) {}
-    Node(int key) : key(key), parent(nullptr), child(nullptr), left(nullptr), right(nullptr) {}
+    Node() : parent(nullptr), child(nullptr), left(nullptr), right(nullptr),
+        degree(0), mark(false){}
+    Node(int key) : key(key), parent(nullptr), child(nullptr), left(nullptr),
+        right(nullptr), degree(0), mark(false){}
 };
 
 class FibHeap {
@@ -20,12 +22,16 @@ class FibHeap {
     void unionLists(Node*, Node*);
     void consolidate();
     void linkHeap(Node*, Node*);\
+    void decreaseKey(Node*, int);
+    void cut(Node*, Node*);
+    void cascadingCut(Node*);
 public:
     FibHeap();
-    void insert_key(int);\
+    Node* insert_key(int);\
     int getMin();
     Node* extractMin();
     void merge(FibHeap*);
+    void deleteNode(Node*);
 };
 
 #endif // FIBHEAP_H
